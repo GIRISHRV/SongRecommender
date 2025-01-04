@@ -127,5 +127,5 @@ def send_static(path):
 def test():
     return "App is working!"
 
-if __name__ == '__main__':
-   app.run(debug=False) 
+"""if __name__ == '__main__':
+   app.run(debug=False) """
