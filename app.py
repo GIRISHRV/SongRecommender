@@ -71,7 +71,7 @@ def get_recommendations():
     #print('Received tracks:', tracks)  # Debugging statement
 
     # Prepare the prompt for the Gemini API
-    prompt = "Please provide 16 song suggestions based on the following list of tracks. Each suggestion should closely match the genre, style, and energy of the original tracks. If the given track list includes genres like metal, rock, pop, hip-hop, or others, the suggestions should heavily reflect these genres, with emphasis on the musical characteristics (e.g., distorted guitars for metal, strong beats for hip-hop). If applicable, consider the popularity and influence of the songs in the same genre. The output should consist of no other text and should be given as Artist - Song, i heavily emphasize no other sentences or text!. Here are the tracks: \n"
+    prompt = "Please provide 16 song suggestions based on the following list of tracks. Each suggestion should closely match the genre, style, and energy of the original tracks. If the given track list includes genres like metal, rock, pop, hip-hop, or others, the suggestions should heavily reflect these genres, with emphasis on the musical characteristics (e.g., distorted guitars for metal, strong beats for hip-hop). If applicable, consider the popularity and influence of the songs in the same genre. If applicable, make sure you include equally enough songs from all languages of songs in the playlist. If for example, english and tamil songs are there, the results should contain songs from both necessarily. The output should consist of no other text and should be given as Artist - Song, i heavily emphasize no other sentences or text!. Here are the tracks: \n"
     for track in tracks:
         prompt += f"{track['artist']} - {track['track']}\n"
 
