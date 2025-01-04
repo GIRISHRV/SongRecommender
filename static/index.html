@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Recommendation Project v1.0</title>
     <!-- Use Flask's url_for to correctly reference static files -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
     <header class="header">
@@ -40,6 +40,6 @@
     </div>
 
     <!-- Use Flask's url_for to reference JS files -->
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="static/main.js"></script>
 </body>
 </html>

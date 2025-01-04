@@ -160,7 +160,7 @@ function displayRecommendations(recommendations) {
 
     if (Array.isArray(recommendations)) {
         recommendations.forEach(rec => {
-            const imageUrl = rec.image ? rec.image : 'static/images/missing.jpg';
+            const imageUrl = rec.image ? rec.image : 'static/missing.jpg';
             const recElement = document.createElement('div');
             recElement.className = 'item';
             recElement.innerHTML = `
