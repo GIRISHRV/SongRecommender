@@ -3,43 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Recommendation Project v1.0</title>
-    <!-- Use Flask's url_for to correctly reference static files -->
+    <title>TuneSearch Beta</title>
     <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
     <header class="header">
-        <h1>Music Recommendation Project v1.0</h1>
+        <h1>TuneSearch Beta</h1>
     </header>
 
     <main>
         <section class="upload-section">
             <div class="upload-container">
-                <h2>Upload Your Playlist</h2>
+                <h1>Upload Your Playlist</h1>
                 <label for="file-input" class="file-input-label">Choose File</label>
                 <input type="file" id="file-input" class="file-input" aria-label="Upload playlist file">
                 <p>or</p>
                 <input type="text" id="playlist-link" class="playlist-link" placeholder="Enter Spotify Playlist Link" aria-label="Enter playlist link">
+                <p id="error-message" style="color: red;"></p> <!-- Error message element -->
                 <button id="recommend-button" class="recommend-button" disabled>Get Recommendations</button>
                 <p id="file-name" class="file-name"></p>
                 <button id="generate-again-button" class="generate-again-button" style="display: none;">Generate Again</button>
             </div>
         </section>
-        <section class="recommendations-section" style="display: none;">
-            <h2>Recommended Tracks</h2>
-            <div id="recommendations" class="recommendations-container"></div>
+        <section class="recommendations-section">
+            <div id="recommendations" class="recommendations-container">
+                <h1>Upload a text file with list of "Artist - Song" or give a Spotify Public Playlist URL to get recommendations of similiar songs </h1>
+                
+            </div>
         </section>
     </main>
 
     <footer class="footer">
-        <p>&copy; Portfolio Project</p>
+        <p>Work In Progress</p>
     </footer>
 
     <div id="spinner" class="spinner-overlay" style="display: none;">
         <div class="spinner"></div>
     </div>
 
-    <!-- Use Flask's url_for to reference JS files -->
     <script src="static/main.js"></script>
 </body>
 </html>

@@ -37,6 +37,7 @@ def get_config():
         'clientId': os.getenv('SPOTIFY_CLIENT_ID'),
         'redirectUri': os.getenv('SPOTIFY_REDIRECT_URI')
     })
+
 @app.route('/playlist-details', methods=['POST'])
 def get_playlist_details():
     data = request.json
@@ -68,8 +69,6 @@ def get_recommendations():
         except Exception as e:
             return jsonify({'error': 'Failed to fetch playlist. Please ensure the playlist is public and accessible.'}), 400
 
-    #print('Received tracks:', tracks)  # Debugging statement
-
     # Prepare the prompt for the Gemini API
     prompt = "Provide exactly 30 song suggestions based on the following list of tracks. Each suggestion must closely align with the genre, style, energy, and overall vibe of the original tracks. For genres like metal, rock, pop, or hip-hop, ensure suggestions reflect defining musical characteristics (e.g., distorted guitars for metal, punchy beats for hip-hop). Maintain a proportional balance between the languages present in the original list—for example, if the playlist includes English and Tamil tracks, the suggestions must include songs from both languages.\n\nSuggestions should also consider the popularity, influence, and cultural relevance of the songs within their respective genres and languages. Where possible, include tracks that match the mood or emotional tone (e.g., upbeat, melancholic, energetic) of the original tracks. Suggest songs from a similar release period as the original tracks unless the genre/style calls for a timeless or modern interpretation. Include a mix of popular tracks and hidden gems to balance familiarity with discovery. Ensure no duplication of tracks from the original list or overly similar suggestions.\n\n Take into account audio attributes like tempo, key, and production style to ensure each suggestion complements the original tracks. You may include up to two experimental or genre-bending tracks that push the boundaries of the original playlist’s style while still aligning with its overall vibe.\n\nEnsure the output contains **only** the song suggestions, strictly formatted as 'Artist - Song', with no additional text, commentary, or formatting.\n\nHere are the tracks:\n" 
 
@@ -82,34 +81,37 @@ def get_recommendations():
         response = model.generate_content(prompt)
         recommendations = response.text.split('\n')
 
-        # Fetch metadata for each recommended track from Last.fm
+        # Fetch metadata for each recommended track from Spotify and Last.fm
         recommendations_with_metadata = []
         for rec in recommendations:
             if ' - ' in rec:
                 artist, track_name = rec.split(' - ', 1)
-                response = requests.get(
-                    'http://ws.audioscrobbler.com/2.0/',
-                    params={
-                        'method': 'track.getInfo',
-                        'api_key': lastfm_api_key,
-                        'artist': artist,
-                        'track': track_name,
-                        'format': 'json'
-                    },
-                    headers={'User-Agent': 'YourAppName/1.0'}
-                )
-                if response.status_code == 200:
-                    track_info = response.json().get('track', {})
-                    #print(f"Metadata for {artist} - {track_name}: {track_info}")  # Debugging statement
-                    recommendations_with_metadata.append({
-                        'artist': artist,
-                        'track': track_name,
-                        'image': track_info.get('album', {}).get('image', [{}])[-1].get('#text', '')  # Get the largest image
-                    })
-                else:
-                    print(f"Error fetching metadata for {artist} - {track_name}: {response.status_code}, {response.text}")
+                spotify_results = spotify.search(q=f"artist:{artist} track:{track_name}", type='track', limit=1)
+                if spotify_results['tracks']['items']:
+                    track_data = spotify_results['tracks']['items'][0]
+                    track_url = track_data['external_urls']['spotify']
 
-        #print('Final recommendations with metadata:', recommendations_with_metadata)  # Debugging statement
+                    response = requests.get(
+                        'http://ws.audioscrobbler.com/2.0/',
+                        params={
+                            'method': 'track.getInfo',
+                            'api_key': lastfm_api_key,
+                            'artist': artist,
+                            'track': track_name,
+                            'format': 'json'
+                        },
+                        headers={'User-Agent': 'YourAppName/1.0'}
+                    )
+
+                    if response.status_code == 200:
+                        track_info = response.json().get('track', {})
+                        recommendations_with_metadata.append({
+                            'artist': artist,
+                            'track': track_name,
+                            'spotifyUrl': track_url,
+                            'image': track_info.get('album', {}).get('image', [{}])[-1].get('#text', '')  # Get the largest image
+                        })
+
         return jsonify(recommendations_with_metadata)
 
     except Exception as e:
@@ -128,5 +130,5 @@ def send_static(path):
 def test():
     return "App is working!"
 
-"""if __name__ == '__main__':
-   app.run(debug=False) """
+if __name__ == '__main__':
+   app.run(debug=False)
