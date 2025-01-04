@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
- 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Recommendation Project v1.0</title>
-    <link rel="stylesheet" href="css/style.css">
+    <!-- Use Flask's url_for to correctly reference static files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-
 <body>
     <header class="header">
         <h1>Music Recommendation Project v1.0</h1>
@@ -18,9 +17,9 @@
             <div class="upload-container">
                 <h2>Upload Your Playlist</h2>
                 <label for="file-input" class="file-input-label">Choose File</label>
-                <input type="file" id="file-input" class="file-input">
+                <input type="file" id="file-input" class="file-input" aria-label="Upload playlist file">
                 <p>or</p>
-                <input type="text" id="playlist-link" class="playlist-link" placeholder="Enter Spotify Playlist Link">
+                <input type="text" id="playlist-link" class="playlist-link" placeholder="Enter Spotify Playlist Link" aria-label="Enter playlist link">
                 <button id="recommend-button" class="recommend-button" disabled>Get Recommendations</button>
                 <p id="file-name" class="file-name"></p>
                 <button id="generate-again-button" class="generate-again-button" style="display: none;">Generate Again</button>
@@ -40,7 +39,7 @@
         <div class="spinner"></div>
     </div>
 
-    <script src="js/main.js"></script>
+    <!-- Use Flask's url_for to reference JS files -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
-
 </html>
