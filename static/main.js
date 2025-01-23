@@ -211,6 +211,7 @@ function displayRecommendations(recommendations) {
                     <img src="${imageUrl}" alt="${rec.track}">
                     <h4>${rec.track}</h4>
                     <p>${rec.artist}</p>
+                    <p>${rec.release_date}</p>
                 </a>
             `;
             recommendationsDiv.appendChild(recElement);

@@ -13,11 +13,6 @@ load_dotenv()
 app = Flask(__name__, static_folder='static')
 CORS(app)
 
-# Get the Last.fm API key from the environment variables
-lastfm_api_key = os.environ.get("LASTFM_API_KEY")
-if not lastfm_api_key:
-    raise ValueError("No LASTFM_API_KEY found in environment variables")
-
 # Configure the Gemini API client with the API key from the environment variable
 api_key = os.environ.get("GEMINI_API_KEY")
 if not api_key:
@@ -84,34 +79,28 @@ def get_recommendations():
         # Fetch metadata for each recommended track from Spotify and Last.fm
         recommendations_with_metadata = []
         for rec in recommendations:
-            if ' - ' in rec:
-                artist, track_name = rec.split(' - ', 1)
-                spotify_results = spotify.search(q=f"artist:{artist} track:{track_name}", type='track', limit=1)
-                if spotify_results['tracks']['items']:
-                    track_data = spotify_results['tracks']['items'][0]
-                    track_url = track_data['external_urls']['spotify']
+                if ' - ' in rec:
+                    artist, track_name = rec.split(' - ', 1)
+                    spotify_results = spotify.search(q=f"artist:{artist} track:{track_name}", type='track', limit=1)
+                    if spotify_results['tracks']['items']:
+                        track_data = spotify_results['tracks']['items'][0]
+                        track_url = track_data['external_urls']['spotify']
+                        album_images = track_data['album']['images']
+                        image_url = album_images[0]['url'] if album_images else ''
+                        album_name = track_data['album']['name']
+                        release_date = track_data['album']['release_date']
+                        popularity = track_data['popularity']
 
-                    response = requests.get(
-                        'http://ws.audioscrobbler.com/2.0/',
-                        params={
-                            'method': 'track.getInfo',
-                            'api_key': lastfm_api_key,
-                            'artist': artist,
-                            'track': track_name,
-                            'format': 'json'
-                        },
-                        headers={'User-Agent': 'YourAppName/1.0'}
-                    )
-
-                    if response.status_code == 200:
-                        track_info = response.json().get('track', {})
                         recommendations_with_metadata.append({
                             'artist': artist,
                             'track': track_name,
                             'spotifyUrl': track_url,
-                            'image': track_info.get('album', {}).get('image', [{}])[-1].get('#text', '')  # Get the largest image
+                            'image': image_url,
+                            'album': album_name,
+                            'release_date': release_date[0:4:],
+                            'popularity': popularity
                         })
-
+        
         return jsonify(recommendations_with_metadata)
 
     except Exception as e:
