@@ -41,7 +41,6 @@ This project leverages AI and various APIs to provide personalized music recomme
    ```plaintext
    SPOTIFY_CLIENT_ID=your_spotify_client_id
    SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
-   LASTFM_API_KEY=your_lastfm_api_key
    ```
 
 5. Run the Flask application:
