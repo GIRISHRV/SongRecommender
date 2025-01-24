@@ -1,20 +1,19 @@
 
 # Music Recommendation Project
 
-This project leverages AI and various APIs to provide personalized music recommendations based on your playlist. It uses Flask for the backend, Spotipy for interacting with the Spotify API, and the Last.fm API for fetching track metadata.
+This project leverages AI and various APIs to provide personalized music recommendations based on your playlist. It uses Flask for the backend, Spotipy for interacting with the Spotify API, and fetching track metadata.
 
 ## Features
 
-- **Upload Your Playlist**: Upload a playlist file or enter a Spotify playlist link.
+- **Upload Your Playlist**: Enter a Spotify playlist link.
 - **AI-Powered Recommendations**: Generates song suggestions that closely match the genre, style, and energy of your original tracks using the Gemini API.
-- **Metadata Enrichment**: Fetches additional metadata for each recommended track from Last.fm.
+- **Metadata Enrichment**: Fetches additional metadata for each recommended track from Spotify.
 - **User-Friendly Interface**: A clean and intuitive UI to enhance user experience.
 
 ## Technologies Used
 
 - **Flask**: For building the backend API.
-- **Spotipy**: For interacting with the Spotify API.
-- **Last.fm API**: For fetching track metadata.
+- **Spotipy**: For interacting with the Spotify API and fetching metadata.
 - **Google Generative AI**: For generating music recommendations.
 - **HTML, CSS, JavaScript**: For the frontend.
 
@@ -54,7 +53,7 @@ This project leverages AI and various APIs to provide personalized music recomme
 
 ## Usage
 
-1. **Upload or Enter Playlist**: Users can either upload a playlist file or enter a Spotify playlist link.
+1. **Upload or Enter Playlist**: Users can enter a Spotify playlist link.
 2. **Get Recommendations**: The AI processes the playlist and provides a list of recommended tracks.
 3. **Explore and Enjoy**: Users can explore the recommended tracks and discover new music.
 
