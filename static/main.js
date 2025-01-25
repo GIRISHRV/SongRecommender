@@ -24,11 +24,17 @@ $(document).ready(() => {
     };
 
     const showLoadingSpinner = () => {
-        $('#loading-spinner').removeClass('d-none');
+        const spinner = document.getElementById('loading-spinner');
+        if (spinner) {
+            spinner.classList.remove('d-none');
+        }
     };
 
     const hideLoadingSpinner = () => {
-        $('#loading-spinner').addClass('d-none');
+        const spinner = document.getElementById('loading-spinner');
+        if (spinner) {
+            spinner.classList.add('d-none');
+        }
     };
 
     const $playlistLinkInput = $('.playlist-link');
