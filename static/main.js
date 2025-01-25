@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', () => {
 $(document).ready(() => {
     const toggleButtonState = ($button, enable) => $button.prop('disabled', !enable);
     const clearToast = () => $('.toast-container').empty();
@@ -24,17 +25,11 @@ $(document).ready(() => {
     };
 
     const showLoadingSpinner = () => {
-        const spinner = document.getElementById('#loading-spinner');
-        if (spinner) {
-            spinner.classList.remove('d-none');
-        }
+        $('#loading-spinner').removeClass('d-none');
     };
 
     const hideLoadingSpinner = () => {
-        const spinner = document.getElementById('#loading-spinner');
-        if (spinner) {
-            spinner.classList.add('d-none');
-        }
+        $('#loading-spinner').addClass('d-none');
     };
 
     const $playlistLinkInput = $('.playlist-link');
@@ -339,4 +334,5 @@ $(document).ready(() => {
     toggleButtonState($recommendButton, false);
 
     attachEventListeners();
+});
 });
