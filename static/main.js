@@ -49,7 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const $uploadContainer = $('.upload-container');
         const $owlCarousel = $('.owl-carousel');
         const $playlistOptions = $('.playlist-options');
-        const link = $playlistLinkInput.val().trim();
+        var link;
+        
+        
         const fetchRecommendations = (link) => {
             const baseUrl = window.location.origin;
             toggleButtonState($recommendButton, false);
@@ -107,7 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="col-md-6 d-flex align-items-stretch">
                         <div class="card text-white bg-dark mb-3 w-100">
                             <div class="row g-0">
-                            <a href="${link}" target="_blank">
+                                <div class="col-md-4">
+                                    <a href="${link}" target="_blank">
                                         <img src="${imageUrl}" class="img-fluid rounded-start" alt="${name}">
                                     </a>
                                 </div>
@@ -143,9 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 recommendations.forEach(({ track, artist, image, spotifyUrl }) => {
                     const recElement = `
                         <div class="item">
-                            <div class="card text-white bg-dark h-100">
+                            <div class="card text-white bg-dark h-100 hover-pop">
                                 <a href="${spotifyUrl}" style="text-decoration: none; color: inherit;">
-                                    <img class="card-img-top" src="${image || 'static/missing.jpg'}" alt="${track}" style="height: 150px; object-fit: cover;">
+                                    <img class="card-img-top" src="${image || 'static/missing.jpg'}" alt="${track}" style="height: 150px; object-fit: contain;">
                                     <div class="card-body">
                                         <h5 class="card-title">${track}</h5>
                                         <p class="card-text">${artist}</p>
@@ -185,7 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 300));
 
             $recommendButton.on('click', () => {
-                const link = $playlistLinkInput.val().trim();
+                link = $playlistLinkInput.val().trim();
+                console.log(link)
                 if (link) fetchRecommendations(link);
                 else {
                     showToast('Please enter a playlist link.');
