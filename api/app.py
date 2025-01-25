@@ -10,6 +10,9 @@ from collections import Counter
 import sys
 import time
 
+# Enable CORS for all routes
+CORS(app, resources={r"/api/*": {"origins": "*"}})  # You can customize "origins" as needed
+
 # Ensure UTF-8 encoding
 sys.stdout.reconfigure(encoding='utf-8')
 
