@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const $uploadContainer = $('.upload-container');
         const $owlCarousel = $('.owl-carousel');
         const $playlistOptions = $('.playlist-options');
-
+        const link = $playlistLinkInput.val().trim();
         const fetchRecommendations = (link) => {
             const baseUrl = window.location.origin;
             toggleButtonState($recommendButton, false);
