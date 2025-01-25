@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const $playlistDetails = $('.playlist-details');
         const $uploadContainer = $('.upload-container');
         const $owlCarousel = $('.owl-carousel');
+        const $playlistOptions = $('.playlist-options');
 
         const fetchRecommendations = (link) => {
             const baseUrl = window.location.origin;
@@ -74,11 +75,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         .catch(() => {
                             showToast('Failed to get recommendations. Please try again.');
                             hideLoadingSpinner();
+                            toggleButtonState($recommendButton, true);
+                            $playlistLinkInput.prop('disabled', false);
                         });
                 },
                 error: (jqXHR, textStatus, errorThrown) => {
                     showToast('Failed to fetch playlist details. Ensure the playlist is public and accessible.');
                     hideLoadingSpinner();
+                    toggleButtonState($recommendButton, true);
+                    $playlistLinkInput.prop('disabled', false);
                 },
             });
         };
@@ -181,7 +186,11 @@ document.addEventListener('DOMContentLoaded', () => {
             $recommendButton.on('click', () => {
                 const link = $playlistLinkInput.val().trim();
                 if (link) fetchRecommendations(link);
-                else showToast('Please enter a playlist link.');
+                else {
+                    showToast('Please enter a playlist link.');
+                    toggleButtonState($recommendButton, true);
+                    $playlistLinkInput.prop('disabled', false);
+                }
             });
 
             $generateAgainButton.on('click', resetUI);

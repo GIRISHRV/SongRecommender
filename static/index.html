@@ -76,68 +76,6 @@
         <h3>Work In Progress</h3>
     </footer>
 
-    <!-- Modals -->
-
-    <div class="modal fade" id="playlistModal" tabindex="-1" aria-labelledby="playlistModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content bg-dark text-light">
-                <div class="modal-header border-bottom border-success bg-dark">
-                    <h5 class="modal-title text-light" id="playlistModalLabel">Add to Playlist</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="playlist-action" class="form-label bg-dark text-light">Choose Action</label>
-                        <select id="playlist-action" class="form-select bg-dark text-light custom-select">
-                            <option class="bg-dark text-light" value="" disabled selected>Select an option</option>
-                            <option class="bg-dark text-light" value="existing">Add to Existing Playlist</option>
-                            <option class="bg-dark text-light" value="new">Create New Playlist</option>
-                        </select>
-                    </div>
-                    <div id="existing-playlist-section" class="d-none">
-                        <div class="mb-3">
-                            <label for="existing-playlist-select" class="form-label bg-dark text-light">Select Playlist</label>
-                            <select id="existing-playlist-select" class="form-select bg-dark text-light custom-select">
-                                <option value="" class="bg-dark text-light" disabled selected>Select a playlist</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div id="new-playlist-section" class="d-none">
-                        <div class="mb-3">
-                            <label for="new-playlist-name" class="form-label bg-dark text-light">Playlist Name</label>
-                            <input type="text" id="new-playlist-name" class="form-control bg-dark text-light border-success" placeholder="Enter playlist name">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer border-top border-success">
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Exit</button>
-                    <button type="button" id="modal-ok-button" class="btn btn-success d-none">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Confirmation Modal -->
-    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content bg-dark text-light position-relative">
-                <div class="modal-header border-bottom border-success bg-dark">
-                    <h5 class="modal-title text-light" id="confirmationModalLabel">Confirm Tracks</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body bg-dark text-light">
-                    <ul id="confirmation-track-list" class="">
-                        <!-- Track list items will be dynamically added here -->
-                    </ul>
-                </div>
-                <div class="modal-footer border-top border-success">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                    <button type="button" id="confirm-add-button" class="btn btn-success">Yes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div id="loading-spinner" class="d-none position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center" style="backdrop-filter: blur(5px); background: rgba(0, 0, 0, 0.5); z-index: 9999;">
         <div class="spinner-border text-success" role="status">
             <span class="visually-hidden">Loading...</span>
