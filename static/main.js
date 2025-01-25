@@ -24,14 +24,14 @@ $(document).ready(() => {
     };
 
     const showLoadingSpinner = () => {
-        const spinner = document.getElementById('loading-spinner');
+        const spinner = document.getElementById('#loading-spinner');
         if (spinner) {
             spinner.classList.remove('d-none');
         }
     };
 
     const hideLoadingSpinner = () => {
-        const spinner = document.getElementById('loading-spinner');
+        const spinner = document.getElementById('#loading-spinner');
         if (spinner) {
             spinner.classList.add('d-none');
         }
