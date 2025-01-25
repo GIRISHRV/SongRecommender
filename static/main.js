@@ -25,11 +25,21 @@ $(document).ready(() => {
     };
 
     const showLoadingSpinner = () => {
-        $('#loading-spinner').removeClass('d-none');
+        const spinner = document.getElementById('loading-spinner');
+        if (spinner) {
+            spinner.classList.remove('d-none');
+        } else {
+            console.error('Loading spinner element not found');
+        }
     };
 
     const hideLoadingSpinner = () => {
-        $('#loading-spinner').addClass('d-none');
+        const spinner = document.getElementById('loading-spinner');
+        if (spinner) {
+            spinner.classList.add('d-none');
+        } else {
+            console.error('Loading spinner element not found');
+        }
     };
 
     const $playlistLinkInput = $('.playlist-link');
