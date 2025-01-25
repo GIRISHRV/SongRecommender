@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
-        const displayPlaylistDetails = (name, owner, imageUrl, stats, genres) => {
+        const displayPlaylistDetails = (name, owner, imageUrl, stats, genres = {}) => {
             $uploadContainer.children().not('#generate-again-button').remove();
             const genreList = Object.entries(genres).map(([genre, percentage]) => `<span class="badge bg-secondary m-1">${genre}: ${percentage.toFixed(2)}%</span>`).join('');
             const detailsHtml = `
@@ -107,8 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="col-md-6 d-flex align-items-stretch">
                         <div class="card text-white bg-dark mb-3 w-100">
                             <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="${imageUrl}" class="img-fluid rounded-start" alt="${name}">
+                            <a href="${link}" target="_blank">
+                                        <img src="${imageUrl}" class="img-fluid rounded-start" alt="${name}">
+                                    </a>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -139,11 +140,11 @@ document.addEventListener('DOMContentLoaded', () => {
             $owlCarousel.html('');
             $('.recommendations-container').find('h1').text('Recommended Tracks');
             if (Array.isArray(recommendations) && recommendations.length > 0) {
-                recommendations.forEach(({ track, artist, image, youtubeUrl }) => {
+                recommendations.forEach(({ track, artist, image, spotifyUrl }) => {
                     const recElement = `
                         <div class="item">
                             <div class="card text-white bg-dark h-100">
-                                <a href="${youtubeUrl}" style="text-decoration: none; color: inherit;">
+                                <a href="${spotifyUrl}" style="text-decoration: none; color: inherit;">
                                     <img class="card-img-top" src="${image || 'static/missing.jpg'}" alt="${track}" style="height: 150px; object-fit: cover;">
                                     <div class="card-body">
                                         <h5 class="card-title">${track}</h5>
