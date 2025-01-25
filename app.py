@@ -20,9 +20,8 @@ load_dotenv()
 
 app = Flask(__name__, static_folder='static')
 app.secret_key = os.urandom(24)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
-# Enable CORS for all routes
-CORS(app, resources={r"/api/*": {"origins": "*"}})  # You can customize "origins" as needed
 # Configure the Gemini API client with the API key from the environment variable
 api_key = os.environ.get("GEMINI_API_KEY")
 if not api_key:
